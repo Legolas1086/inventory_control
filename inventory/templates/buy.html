@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sell</title>
+</head>
+<body>
+    <div class = sidebar>
+       <a href="{% url 'home' %}"> <h1>ELITE SPORTS</h1> </a>
+        <div class = buttons>
+            <button class = button1> 
+                <a href="{% url 'search' %}">search</a>
+            </button>
+            <button class = button1>
+                <a href="{% url 'sell' %}">sell</a>
+            </button>
+            <button class = button1 id = "buy">
+                <a href="{% url 'buy' %}">buy</a>
+            </button>
+        </div>
+    </div> 
+ 
+    <div class = container>
+        
+        <form method = 'GET' action = "{% url 'buy_insert' %}">
+            <input type="text" id="item_id" name = "id_0", placeholder="item_id">
+            <input type="text"  id="s_id" name="s_id_0" placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_0", placeholder="qunatity">
+            <input type="number" id="price" name = "price_0" placeholder="price">
+
+            <input type="text" id="item_id" name = "id_1", placeholder="item_id">
+            <input type="text"  id="s_id" name="s_id_1" placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_1", placeholder="qunatity">
+            <input type="number" id="price" name = "price_1", placeholder="price">
+              
+            <input type="text" id="item_id" name = "id_2", placeholder="item_id">
+            <input type="text" id="s_id" name="s_id_2" placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_2", placeholder="qunatity">
+            <input type="number" id="price" name = "price_2" placeholder="price">
+              
+            <input type="text" id="item_id" name = "id_3", placeholder="item_id">
+            <input type="text"  id="s_id" name="s_id_3" placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_3", placeholder="qunatity">
+            <input type="number" id="price" name = "price_3", placeholder="price">
+
+            <input type="text" id="item_id" name = "id_4", placeholder="item_id">
+            <input type="text" id="s_id" name="s_id_4", placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_4", placeholder="qunatity">
+            <input type="number" id="price" name = "price_4", placeholder="price">
+              
+            <input type="text" id="item_id" name = "id_5", placeholder="item_id">
+            <input type="text" id="s_id" name="s_id_5", placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_5", placeholder="qunatity">
+            <input type="number" id="price" name = "price_5", placeholder="price">
+              
+            <input type="text" id="item_id" name = "id_6", placeholder="item_id">
+            <input type="text"  id="s_id" name="s_id_6" placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_6", placeholder="qunatity">
+            <input type="number" id="price" name = "price_6", placeholder="price">
+              
+            <input type="text" id="item_id" name = "id_7", placeholder="item_id">
+            <input type="text"  id="s_id" name="s_id_7" placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_7", placeholder="qunatity">
+            <input type="number" id="price" name = "price_7", placeholder="price">
+              
+            <input type="text" id="item_id" name = "id_8", placeholder="item_id">
+            <input type="text"  id="s_id" name="s_id_8" placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_8", placeholder="qunatity">
+            <input type="number" id="price" name = "price_8", placeholder="price">
+              
+            <input type="text" id="item_id" name = "id_9", placeholder="item_id">
+            <input type="text" id="s_id" name="s_id_9", placeholder="supplier id">
+            <input type="number" id = "quantity" name = "quantity_9", placeholder="qunatity">
+            <input type="number" id="price" name = "price_9", placeholder="price">
+              
+            
+        
+            <input type="submit" id="submit" name="submit" value = buy>
+
+        </form>
+    </div>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
+
+*{
+        box-sizing: border-box;
+        padding: 0px;
+        margin: 0px;
+        
+    }
+    .sidebar{
+        background: linear-gradient(rgb(179, 234, 238),rgb(52, 111, 221));
+        position: fixed;
+        width: 15%;
+        height: 100%;
+        color:black;
+    
+        margin-top: 0px;
+        
+    }
+
+    body{
+        background-color:rgb(220, 236, 240);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        width: 100%;
+        height: 100%;
+  
+    }
+
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: left;
+
+        margin-top: 10rem;
+        margin-left: 3rem;
+        border: none;
+        outline: none;
+   
+          
+    }
+
+    .button1{
+        outline: none;
+        box-shadow: 2px 2px 2px 2px;
+        border-radius: 43%;
+        border:none;
+        width: 10rem;
+        font-size: 2rem;
+        padding: 0.5rem 0rem;
+        margin-top: 2rem;
+        
+    }
+
+    #buy{
+        box-shadow: none;
+    }
+
+    .button1:hover{
+        cursor: pointer;
+        transition: ease-in-out 2s;
+        box-shadow: none;
+    }
+
+    a{
+        color: black;
+        text-decoration: none;
+    }
+
+    h1{
+        margin-top: 20%;
+        margin-left: 10%;
+        font-family: 'Langar', cursive;
+        text-shadow: 2px 2px ;
+    }
+
+
+
+
+    .container{
+        
+        margin-top: 10rem;
+        margin-left: 30rem;
+        border-radius: 15px 15px 15px 15px;
+        padding:0px;
+        width: 75rem;
+    }
+
+    form > #item_id,#s_id,#quantity,#price{
+        padding: 1rem;
+        width:15rem;
+        border-radius: 10px;
+    }
+
+    form > #submit{
+        padding: 1rem;
+        width: 15rem;
+        border-radius: 10px;
+        background-color: rgb(170, 167, 167);
+        font-size: large;
+        margin-left: 25rem;
+        margin-top: 5rem;
+
+    }
+
+
+</style>    
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sell</title>
+</head>
+<body>
+    <div class = "sidebar">
+       <a href="{% url 'home' %}"> <h1>ELITE SPORTS</h1> </a>
+        <div class = "buttons">
+            <button class = "button1" id = "search"> 
+                <a href="{% url 'search' %}">search</a>
+            </button>
+            <button class = "button1", id = "sell">
+                <a href="{% url 'sell' %}">sell</a>
+            </button>
+            <button class = "button1", id = "buy">
+                <a href="{% url 'buy' %}">buy</a>
+            </button>
+        </div>
+    </div> 
+ 
+    <div class = "container">
+        
+        
+        <form method = 'GET' action = "{% url 'sell_insert' %}">
+            <input type="text" id="item_id_0" name = "id_0" placeholder="item_id">
+            <input type="number" id = "quantity_0" name = "quantity_0" placeholder="quantity">
+            <input type="number" id="price_0" name = "price_0" placeholder="price">
+            <input type="text" id="c_name_0" name="c_name_0", placeholder="customer name">
+            <input type="number" id="c_no_0" name="c_no_0" placeholder="phone">
+
+            <input type="text" id="item_id_1" name = "id_1" placeholder="item_id">
+            <input type="number" id = "quantity_1" name = "quantity_1" placeholder="quantity">
+            <input type="number" id="price_1" name = "price_1" placeholder="price">
+            <input type="text" id="c_name_1" name="c_name_1", placeholder="customer name">
+            <input type="number" id="c_no_1" name="c_no_1" placeholder="phone">
+
+            <input type="text" id="item_id_2" name = "id_2" placeholder="item_id">
+            <input type="number" id = "quantity_2" name = "quantity_2" placeholder="quantity">
+            <input type="number" id="price_2" name = "price_2" placeholder="price">
+            <input type="text" id="c_name_2" name="c_name_2", placeholder="customer name">
+            <input type="number" id="c_no_2" name="c_no_2" placeholder="phone">
+
+            <input type="text" id="item_id_3" name = "id_3" placeholder="item_id">
+            <input type="number" id = "quantity_3" name = "quantity_3" placeholder="quantity">
+            <input type="number" id="price_3" name = "price_3" placeholder="price">
+            <input type="text" id="c_name_3" name="c_name_3", placeholder="customer name">
+            <input type="number" id="c_no_3" name="c_no_3" placeholder="phone">
+
+            <input type="text" id="item_id_4" name = "id_4" placeholder="item_id">
+            <input type="number" id = "quantity_4" name = "quantity_4" placeholder="quantity">
+            <input type="number" id="price_4" name = "price_4" placeholder="price">
+            <input type="text" id="c_name_4" name="c_name_4", placeholder="customer name">
+            <input type="number" id="c_no_4" name="c_no_4" placeholder="phone">
+
+            <input type="text" id="item_id_5" name = "id_5" placeholder="item_id">
+            <input type="number" id = "quantity_5" name = "quantity_5" placeholder="quantity">
+            <input type="number" id="price_5" name = "price_5" placeholder="price">
+            <input type="text" id="c_name_5" name="c_name_5", placeholder="customer name">
+            <input type="number" id="c_no_5" name="c_no_5" placeholder="phone">
+
+            <input type="text" id="item_id_6" name = "id_6" placeholder="item_id">
+            <input type="number" id = "quantity_6" name = "quantity_6" placeholder="quantity">
+            <input type="number" id="price_6" name = "price_6" placeholder="price">
+            <input type="text" id="c_name_6" name="c_name_6", placeholder="customer name">
+            <input type="number" id="c_no_6" name="c_no_6" placeholder="phone">
+
+            <input type="text" id="item_id_7" name = "id_7" placeholder="item_id">
+            <input type="number" id = "quantity_7" name = "quantity_7" placeholder="quantity">
+            <input type="number" id="price_7" name = "price_7" placeholder="price">
+            <input type="text" id="c_name_7" name="c_name_7", placeholder="customer name">
+            <input type="number" id="c_no_7" name="c_no_7" placeholder="phone">
+
+            <input type="text" id="item_id_8" name = "id_8" placeholder="item_id">
+            <input type="number" id = "quantity_8" name = "quantity_8" placeholder="quantity">
+            <input type="number" id="price_8" name = "price_8" placeholder="price">
+            <input type="text" id="c_name_8" name="c_name_8", placeholder="customer name">
+            <input type="number" id="c_no_8" name="c_no_8" placeholder="phone">
+
+            <input type="text" id="item_id_9" name = "id_9" placeholder="item_id">
+            <input type="number" id = "quantity_9" name = "quantity_9" placeholder="quantity">
+            <input type="number" id="price_9" name = "price_9" placeholder="price">
+            <input type="text" id="c_name_9" name="c_name_9", placeholder="customer name">
+            <input type="number" id="c_no_9" name="c_no_9" placeholder="phone">
+
+           
+
+            
+
+            <input type="submit" id="submit" name="submit" value = sell>
+
+        </form>
+    </div>
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Langar&display=swap');
+
+*{
+        box-sizing: border-box;
+        padding: 0px;
+        margin: 0px;
+        
+    }
+    .sidebar{
+        background: linear-gradient(rgb(179, 234, 238),rgb(52, 111, 221));
+        position: fixed;
+        width: 15%;
+        height: 100%;
+        color:black;
+        margin-top: 0rem;
+        
+    }
+
+    body{
+        background-color:rgb(220, 236, 240);
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        height: 100%;
+        width: 100%;
+    }
+
+    .buttons{
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: left;
+
+        margin-top: 10rem;
+        margin-left: 3rem;
+        border: none;
+        outline: none;      
+    }
+
+    .button1{
+        outline: none;
+        box-shadow: 2px 2px 2px 2px;
+        border-radius: 43%;
+        border:none;
+        width: 10rem;
+        font-size: 2rem;
+        padding: 0.5rem 0rem;
+        margin-top: 2rem;
+        
+    }
+
+    #sell{
+        box-shadow: none;
+    }
+
+    .button1:hover{
+        cursor: pointer;
+        transition: ease-in-out 2s;
+        box-shadow: none;
+    }
+
+    a{
+        color: black;
+        text-decoration: none;
+    }
+
+    h1{
+        margin-top: 20%;
+        margin-left: 10%;
+        font-family: 'Langar', cursive;
+        text-shadow: 2px 2px ;
+    }
+
+
+
+  
+    .container{
+        margin-top: 10rem;
+        margin-left: 30rem;
+        border-radius: 15px 15px 15px 15px;
+        padding:0px;
+        width: 75rem;
+    }
+
+    form > #item_id_0,#c_name_0,#c_no_0,#quantity_0,#price_0,#item_id_1,#c_name_1,#c_no_1,#quantity_1,#price_1,
+    #item_id_2,#c_name_2,#c_no_2,#quantity_2,#price_2,#item_id_3,#c_name_3,#c_no_3,#quantity_3,#price_3,
+    #item_id_4,#c_name_4,#c_no_4,#quantity_4,#price_4,#item_id_5,#c_name_5,#c_no_5,#quantity_5,#price_5,
+    #item_id_6,#c_name_6,#c_no_6,#quantity_6,#price_6,#item_id_7,#c_name_7,#c_no_7,#quantity_7,#price_7,
+    #item_id_8,#c_name_8,#c_no_8,#quantity_8,#price_8,#item_id_9,#c_name_9,#c_no_9,#quantity_9,#price_9{
+        padding: 1rem;
+        border-radius: 10px;
+       
+        
+    }
+
+  
+
+    form > #submit{
+        background-color: rgb(182, 180, 180);
+        padding: 0.7rem;
+        width: 10rem;
+        border-radius: 10px;
+        margin-top: 2rem;
+        margin-left: 30rem;
+    }
+
+
+
+</style>    
+</body>
+</html>
