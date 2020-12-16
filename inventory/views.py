@@ -120,5 +120,48 @@ def search_result(request):
             return render(request,'search.html',context={'item':item_list})      
 
 
-                
+def refer(request):
+    con = sqlite3.connect('/home/clown/DB/Inventory')
+    obj = con.execute("SELECT * FROM supplier")
+    con.commit()
+    supplier_list=[]
+    for i in obj:
+        supplier_list.append({
+            'id':i[0],
+            'name':i[1],
+            'c_id':i[2],
+            'rating':i[3]
+        }) 
+    
+
+
+    obj1 = con.execute("SELECT warehouse.w_id,warehouse.w_adress,warehouse.w_capacity,sum(stored.quantity) AS Occupied FROM warehouse,stored WHERE warehouse.w_id=stored.w_id GROUP BY stored.w_id")
+    con.commit()
+    warehouse_list=[]
+    for i in obj1:
+        warehouse_list.append({
+            'id':i[0],
+            'adress':i[1],
+            'capacity':i[2],
+            'occupied':i[3]
+        })                 
+
+    obj2 = con.execute("SELECT * FROM category")
+    category_list = []
+    for i in obj2:
+        category_list.append({
+            'id':i[0],
+            'name':i[1]
+        })  
+    
+
+    obj3 = con.execute("SELECT item_id,w_id FROM stored")
+    storage_list = []
+    for i in obj3:
+        storage_list.append({
+            'id':i[0],
+            'stored':i[1]
+        }) 
+
+    return render(request,'refer.html', context={'supplier':supplier_list, 'storage':warehouse_list, 'categories':category_list,'products':storage_list})    
 
