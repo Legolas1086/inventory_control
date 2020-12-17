@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
+import datetime
 import sqlite3
 
 
@@ -28,7 +29,7 @@ def sell_insert(request):
             if id !='' and quantity !='' and price !='' and c_name !='' and c_no !='':
                 con = sqlite3.connect('/home/clown/DB/Inventory.db')
                 con.execute("PRAGMA foreign_keys=ON") 
-                con.execute("INSERT INTO sell(item_id, quantity, unit_price, cust_name, cust_phone) VALUES(?,?,?,?,?)",(id,int(quantity),int(price),c_name,c_no))
+                con.execute("INSERT INTO sell(item_id, quantity, unit_price, cust_name, cust_phone,date_time) VALUES(?,?,?,?,?,?)",(id,int(quantity),int(price),c_name,c_no,str(datetime.datetime.now())))
                 con.commit()
                 con.close()
                 
@@ -57,7 +58,7 @@ def buy_insert(request):
             if id !='' and s_id !='' and price !='' and quantity !='':
                 con = sqlite3.connect('/home/clown/DB/Inventory.db')
                 con.execute("PRAGMA foreign_keys=ON")
-                con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price) VALUES(?,?,?,?)", (id,s_id,int(quantity),int(price)))
+                con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price,date_time) VALUES(?,?,?,?,?)", (id,s_id,int(quantity),int(price),str(datetime.datetime.now())))
                 con.commit()
                 con.close() 
                 
@@ -118,51 +119,122 @@ def search_result(request):
                     'price':i[7]
                 }) 
 
-            return render(request,'search.html',context={'item':item_list})      
+            return render(request,'search.html',context={'item':item_list})     
 
 
-def refer(request):
-    con = sqlite3.connect('/home/clown/DB/Inventory.db')
-    obj = con.execute("SELECT * FROM supplier")
-    con.commit()
-    supplier_list=[]
-    for i in obj:
-        supplier_list.append({
-            'id':i[0],
-            'name':i[1],
-            'c_id':i[2],
-            'rating':i[3]
-        }) 
-    
+
+def detail(request):
+    return render(request,'detail.html')            
 
 
-    obj1 = con.execute("SELECT warehouse.w_id,warehouse.w_adress,warehouse.w_capacity,sum(stored.quantity) AS Occupied FROM warehouse,stored WHERE warehouse.w_id=stored.w_id GROUP BY stored.w_id")
-    con.commit()
-    warehouse_list=[]
-    for i in obj1:
-        warehouse_list.append({
-            'id':i[0],
-            'adress':i[1],
-            'capacity':i[2],
-            'occupied':i[3]
-        })                 
 
-    obj2 = con.execute("SELECT * FROM category")
-    category_list = []
-    for i in obj2:
-        category_list.append({
-            'id':i[0],
-            'name':i[1]
-        })  
-    
+def detail_result(request):
+    if request.method=='GET':
+        if request.GET.get('details')=='sold':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            obj = con.execute("SELECT * FROM sell ORDER BY date_time DESC")
+            con.commit()
+            sold_list = []
+            for i in obj:
+                sold_list.append({
+                    'id':i[0],
+                    'item':i[1],
+                    'quantity':i[2],
+                    'price':i[3],
+                    'c_name':i[4],
+                    'c_no':i[5],
+                    'date_time':i[6]
+                })
 
-    obj3 = con.execute("SELECT item_id,w_id FROM stored")
-    storage_list = []
-    for i in obj3:
-        storage_list.append({
-            'id':i[0],
-            'stored':i[1]
-        }) 
+            return render(request,'detail_result.html',context={'header':0,'sold':sold_list})    
 
-    return render(request,'refer.html', context={'supplier':supplier_list, 'storage':warehouse_list, 'categories':category_list,'products':storage_list})    
+
+
+        elif request.GET.get('details')=='bought':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            obj = con.execute("SELECT * FROM bought ORDER BY date_time DESC")
+            con.commit()
+            bought_list = []
+            for i in obj:
+                bought_list.append({
+                    'item':i[0],
+                    'supplier':i[1],
+                    'quantity':i[2],
+                    'price':i[3],
+                    'date_time':i[4]
+                })
+
+            return render(request,'detail_result.html',context={'header':1,'bought':bought_list})    
+
+
+
+
+        elif request.GET.get('details')=='suppliers':     
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            obj = con.execute("SELECT * FROM supplier")
+            con.commit()
+            supplier_list=[]
+            for i in obj:
+                supplier_list.append({
+                    'id':i[0],
+                    'name':i[1],
+                    'c_id':i[2],
+                    'rating':i[3]
+                }) 
+
+            return render(request,'detail_result.html',context={'header':2,'supplier':supplier_list})
+
+
+        elif request.GET.get('details')=='warehouse':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            obj = con.execute("SELECT warehouse.w_id,warehouse.w_adress,warehouse.w_capacity,sum(stored.quantity) AS Occupied FROM warehouse,stored WHERE warehouse.w_id=stored.w_id GROUP BY stored.w_id")
+            con.commit()
+            warehouse_list=[]
+            for i in obj:
+                warehouse_list.append({
+                'id':i[0],
+                'adress':i[1],
+                'capacity':i[2],
+                'occupied':i[3]
+            })   
+            
+            return render(request,'detail_result.html',context={'header':3,'storage':warehouse_list})
+
+
+
+        elif request.GET.get('details')=='category':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            obj = con.execute("SELECT * FROM category")
+            con.commit()
+            category_list = []
+            for i in obj:
+                category_list.append({
+                'id':i[0],
+                'name':i[1]
+            })  
+
+          
+            return render(request,'detail_result.html',context={'header':4,'categories':category_list})    
+
+
+
+        elif request.GET.get('details')=='product stored':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            obj = con.execute("SELECT item_id,w_id FROM stored")
+            con.commit()
+            storage_list = []
+            for i in obj:
+                storage_list.append({
+                'id':i[0],
+                'stored':i[1]
+            })
+
+            return render(request,'detail_result.html', context={'header':5,'products':storage_list})   
+
+
+
+
+
+def change(request):
+    return render(request,'change.html')     
 
