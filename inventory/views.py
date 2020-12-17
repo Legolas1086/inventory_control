@@ -26,8 +26,8 @@ def sell_insert(request):
             #submitbutton = request.GET.get('submit')
 
             if id !='' and quantity !='' and price !='' and c_name !='' and c_no !='':
-                con = sqlite3.connect('/home/clown/DB/Inventory')
-
+                con = sqlite3.connect('/home/clown/DB/Inventory.db')
+                con.execute("PRAGMA foreign_keys=ON") 
                 con.execute("INSERT INTO sell(item_id, quantity, unit_price, cust_name, cust_phone) VALUES(?,?,?,?,?)",(id,int(quantity),int(price),c_name,c_no))
                 con.commit()
                 con.close()
@@ -55,7 +55,8 @@ def buy_insert(request):
         #submitbutton = request.GET.get('submit')
 
             if id !='' and s_id !='' and price !='' and quantity !='':
-                con = sqlite3.connect('/home/clown/DB/Inventory')
+                con = sqlite3.connect('/home/clown/DB/Inventory.db')
+                con.execute("PRAGMA foreign_keys=ON")
                 con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price) VALUES(?,?,?,?)", (id,s_id,int(quantity),int(price)))
                 con.commit()
                 con.close() 
@@ -69,7 +70,7 @@ def buy_insert(request):
 
 
 def search(request):
-    con = sqlite3.connect('/home/clown/DB/Inventory')
+    con = sqlite3.connect('/home/clown/DB/Inventory.db')
     obj = con.execute("SELECT * FROM item_details ORDER BY item_price")
     con.commit()
     item_list=[]
@@ -100,7 +101,7 @@ def search_result(request):
         submitbutton = request.GET.get('search_button')    
 
         if sludge is not None:
-            con = sqlite3.connect('/home/clown/DB/Inventory')
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
             obj = con.execute("SELECT * FROM item_details WHERE item_id like ? OR item_name like ? OR brand like ? OR c_name like ? OR color like ? ORDER BY item_price",(sludge,sludge,sludge,sludge,sludge,))
             con.commit()
 
@@ -121,7 +122,7 @@ def search_result(request):
 
 
 def refer(request):
-    con = sqlite3.connect('/home/clown/DB/Inventory')
+    con = sqlite3.connect('/home/clown/DB/Inventory.db')
     obj = con.execute("SELECT * FROM supplier")
     con.commit()
     supplier_list=[]
