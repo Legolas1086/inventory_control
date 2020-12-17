@@ -110,22 +110,20 @@
 
 
     {% ifequal 2 header %}
-    <div class = table2>
+    <div class = table4>
         <ul>
             <li class="id">Supplier ID</li>
             <li class="id">Name</li>
-            <li class="id">category supplied</li>
             <li class="quantity">Rating</li>
         </ul>
     </div>
 
     {% for i in supplier %}
-    <div class=container2>
+    <div class=container4>
         <div class=detail>
             <ul>
                 <li class = id>{{i.id }}</li>
                 <li class = id>{{ i.name }}</li>
-                <li class = id>{{ i.c_id }}</li>
                 <li class = quantity>{{ i.rating }}</li>     
             </ul>
         </div>
@@ -399,6 +397,31 @@
         padding:0px;
         width: 60rem;
     }
+
+    .table4{
+        background-color: rgb(158, 157, 157);
+        margin-left:40rem ;
+        width: 45rem;
+        border:10px 10px;
+        border-color: black;
+        border-style: solid;
+        border-radius: 10px 10px;
+        margin-top: 5rem;
+    }
+
+    .container4{
+        display: flex;
+        background-color: white;
+        margin-top: 0.5rem;
+        margin-left: 40rem;
+        border: 3px 3px;
+        border-color: black;
+        border-style: solid;
+        border-radius: 15px 15px 15px 15px;
+        padding:0px;
+        width: 45rem;
+    }
+
 
     .table3{
         background-color: rgb(158, 157, 157);

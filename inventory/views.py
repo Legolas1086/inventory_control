@@ -178,8 +178,7 @@ def detail_result(request):
                 supplier_list.append({
                     'id':i[0],
                     'name':i[1],
-                    'c_id':i[2],
-                    'rating':i[3]
+                    'rating':i[2]
                 }) 
 
             return render(request,'detail_result.html',context={'header':2,'supplier':supplier_list})
