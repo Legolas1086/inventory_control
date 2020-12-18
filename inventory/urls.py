@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import home,sell,sell_insert,buy,buy_insert,search,search_result,detail,change,detail_result,change_result,add_item,add_category,add_supplier,add_warehouse
+from .views import update_price,update_rating
 
 urlpatterns = [
     path('', home, name = 'home'),
@@ -17,6 +18,8 @@ urlpatterns = [
     path('add_supplier/',add_supplier,name='add_supplier'),
     path('add_category/',add_category,name='add_category'),
     path('add_warehouse/',add_warehouse,name='add_warehouse'),
+    path('update_price/',update_price,name='update_price'),
+    path('update_rating/',update_rating,name='update_rating'),
     
 
 ]

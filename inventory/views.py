@@ -245,8 +245,8 @@ def change_result(request):
         if choice=='add':
             return render(request,'add.html')
 
-        elif choice=='delete':
-            return render(request,'delete.html')          
+        elif choice=='update':
+            return render(request,'update.html')          
 
 
 def add_item(request):
@@ -323,6 +323,42 @@ def add_warehouse(request):
 
         else:
             return render(request,'add.html')
+
+
+def update_price(request):
+    if request.method=='GET':
+        id = request.GET.get('id')
+        price = request.GET.get('price')
+
+        if id!='' and price!='':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("UPDATE item SET item_price=? WHERE item_id=?",(float(price),id))
+            con.commit()
+            return render(request,'update.html')
+
+        else:
+            return render(request,'update.html')
+
+
+def update_rating(request):
+    if request.method=='GET':
+        id = request.GET.get('id')
+        rating = request.GET.get('rating')
+
+        if id!='' and rating!='':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("UPDATE supplier SET rating=? WHERE item_id=?",(float(rating),id))
+            con.commit()
+            return render(request,'update.html')
+
+        else:
+            return render(request,'update.html')
+
+    
+
+                        
 
 
 
