@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>change</title>
+    <title>delete</title>
 </head>
 <body>
     <div class = sidebar>
@@ -28,30 +28,6 @@
         </div>
     </div> >
 
-<div class="main">
-    <div>
-        <h2>What do you want to do?</h2>
-    </div>
-
-    <div class = radio>
-        <form  method='GET' action="{% url 'change_result' %}">
-            <div>
-                <input type="radio" id="add" name="change" value="add">
-                <label for="add">Add record</label>
-            </div>
-            
-            <div>
-                <input type="radio" id="delete" name="change" value="delete">
-                <label for="delete">Delete record</label>
-            </div>
-            
-
-            <input type="submit" name="submit_button" id="submit_button" value="submit">
-
-            
-        </form>
-    </div>
-</div>
 
     
 
@@ -78,34 +54,21 @@
     }
 
     body{
-        background-color:rgb(220, 236, 240);
+        background-color:;rgb(220, 236, 240)
         background-repeat: no-repeat;
         background-size: cover;
         max-width: 95%;
         height: auto;
-        
 
     }
 
-    .main{
-        display: flex;
-        flex-direction: column;
-    }
-
-  
+ 
 
     h1{
         margin-top: 20%;
         margin-left: 10%;
         font-family: 'Langar', cursive;
         text-shadow: 2px 2px ;
-    }
-
-
-    h2{
-        margin-top: 5rem;
-        margin-left: 40rem;
-        font-size: xx-large;
     }
 
     .buttons{
@@ -146,36 +109,7 @@
         text-decoration: none;
     }
 
-    .radio{
-     
-        margin-top: 5rem;
-        margin-left: 40rem;
-      
-    }
-
-    .radio > form{
-        display: flex;
-        flex-direction: column;
-        font-size: xx-large;
-        
-    }
-
-    input[type=radio]{
-        width: 1.2rem;
-        height:1.2rem;
-    }
-
-    
-
-    #submit_button{
-        background-color: rgb(194, 193, 193);
-        width: 15rem;
-        padding: 0.5rem;
-        margin-top: 3rem;
-        font-size: large;
-        border-radius: 10px 10px;
-    }
-
+   
 </style>
 </body>
 

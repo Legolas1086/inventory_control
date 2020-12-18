@@ -29,7 +29,7 @@ def sell_insert(request):
             if id !='' and quantity !='' and price !='' and c_name !='' and c_no !='':
                 con = sqlite3.connect('/home/clown/DB/Inventory.db')
                 con.execute("PRAGMA foreign_keys=ON") 
-                con.execute("INSERT INTO sell(item_id, quantity, unit_price, cust_name, cust_phone,date_time) VALUES(?,?,?,?,?,?)",(id,int(quantity),int(price),c_name,c_no,str(datetime.datetime.now())))
+                con.execute("INSERT INTO sell(item_id, quantity, unit_price, cust_name, cust_phone,date_time) VALUES(?,?,?,?,?,?)",(id,int(quantity),float(price),c_name,c_no,str(datetime.datetime.now())))
                 con.commit()
                 con.close()
                 
@@ -58,7 +58,7 @@ def buy_insert(request):
             if id !='' and s_id !='' and price !='' and quantity !='':
                 con = sqlite3.connect('/home/clown/DB/Inventory.db')
                 con.execute("PRAGMA foreign_keys=ON")
-                con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price,date_time) VALUES(?,?,?,?,?)", (id,s_id,int(quantity),int(price),str(datetime.datetime.now())))
+                con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price,date_time) VALUES(?,?,?,?,?)", (id,s_id,int(quantity),float(price),str(datetime.datetime.now())))
                 con.commit()
                 con.close() 
                 
@@ -235,5 +235,95 @@ def detail_result(request):
 
 
 def change(request):
-    return render(request,'change.html')     
+    return render(request,'change.html')   
+
+def change_result(request):
+    if request.method=="GET":
+        choice = request.GET.get("change")
+        submitbutton = request.GET.get('submit_button')
+
+        if choice=='add':
+            return render(request,'add.html')
+
+        elif choice=='delete':
+            return render(request,'delete.html')          
+
+
+def add_item(request):
+    if request.method=='GET':
+        id = request.GET.get('id')
+        name = request.GET.get('name')
+        brand = request.GET.get('brand')
+        c_id = request.GET.get('c_id')
+        size = request.GET.get('size')
+        color = request.GET.get('color')
+        price = request.GET.get('price')
+        w_id = request.GET.get('w_id')
+        quantity = request.GET.get('quantity')
+
+        if id!='' and name!='' and brand!='' and c_id!='' and price!='' and w_id!='' and quantity!='':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?)",(id,name,brand,c_id,size,color,float(price)))
+            con.execute("INSERT INTO stored VALUES(?,?,?)",(id,w_id,int(quantity)))
+            con.commit()
+            return render(request,'add.html')
+
+        else:
+            return render(request,'add.html')
+
+
+
+def add_supplier(request):
+    if request.method=='GET':
+        id = request.GET.get('id')
+        name = request.GET.get('name')
+        rating = request.GET.get('rating')
+  
+        if id!='' and name!='' and rating!='':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("INSERT INTO supplier VALUES(?,?,?)",(id,name,float(rating)))
+            con.commit()
+            return render(request,'add.html')
+
+        else:
+            return render(request,'add.html')
+
+
+
+def add_category(request):
+    if request.method=='GET':
+        id = request.GET.get('id')
+        name = request.GET.get('name')
+        
+  
+        if id!='' and name!='':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("INSERT INTO category VALUES(?,?)",(id,name))
+            con.commit()
+            return render(request,'add.html')
+
+        else:
+            return render(request,'add.html')
+
+def add_warehouse(request):
+    if request.method=='GET':
+        id = request.GET.get('id')
+        adress = request.GET.get('adress')
+        capacity = request.GET.get('capacity')
+  
+        if id!='' and adress!='' and capacity!='':
+            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("INSERT INTO warehouse VALUES(?,?,?)",(id,adress,int(capacity)))
+            con.commit()
+            return render(request,'add.html')
+
+        else:
+            return render(request,'add.html')
+
+
+
 
