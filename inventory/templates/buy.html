@@ -91,10 +91,33 @@
 
     {% ifequal 1 error %}
     <div class="error">
-        <pre>
-            ERROR! at row {{i}}. A mandatory field was empty for {{id}}.
-              Please enter all row below it with all mandatory fields.
-        </pre>
+        <p>
+            ERROR! . A mendatory field was empty for products/items {% for i in ids %} "{{i}}" , {% endfor %}.
+                              Please re-enter these rows.
+        </p>
+    </div>
+    {% endifequal %}
+
+
+    {% ifequal 2 error %}
+    <div class="error">
+        <p>
+            ERROR! . Invalid products/items ids or invalid supplier ids for {% for i in foreigns %} "{{i}}" , {% endfor %}.
+                              Please re-enter valid products/items.
+        </p>
+    </div>
+    {% endifequal %}
+
+    {% ifequal 3 error %}
+    <div class="error">
+        <p>
+            ERROR! . A mendatory field was empty for products/items {% for i in ids %} "{{i}}" , {% endfor %}.
+            Please re-enter these rows.
+        </p>
+        <p>  
+            ERROR! . Invalid products/items {% for i in foreigns %} "{{i}}" , {% endfor %}.
+                              Please re-enter valid products/items.
+        </p>  
     </div>
     {% endifequal %}
 
@@ -205,7 +228,7 @@
     }
 
     form > #submit{
-        padding: 1rem;
+        padding: 0.5rem;
         width: 12rem;
         border-radius: 10px;
         background-color: rgb(170, 167, 167);
@@ -217,12 +240,15 @@
 
     .error{
         display:flex;
-        margin-top: 3rem;
+        width: 80rem;
+        margin-top: 2rem;
         margin-left: 20rem;
         font-size: xx-large;
         color: red;
     }
-
+    p{
+        margin-left: 5rem;
+    }
 
 
 </style>    

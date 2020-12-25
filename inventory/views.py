@@ -67,6 +67,9 @@ def buy(request):
     return render(request,'buy.html')     
 
 def buy_insert(request):
+    id_list = []
+    foreign_list = []
+
     if request.method == 'GET':
         for i in range(10):
             id = request.GET.get('id_'+str(i))
@@ -80,22 +83,35 @@ def buy_insert(request):
             if id !='' and s_id !='' and price !='' and quantity !='':
                 con = sqlite3.connect('/home/clown/DB/Inventory.db')
                 con.execute("PRAGMA foreign_keys=ON")
-                con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price,date_time) VALUES(?,?,?,?,?)", (id,s_id,int(quantity),float(price),str(datetime.datetime.now())))
-                con.commit()
-                con.close() 
-                
+                try:
+                    con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price,date_time) VALUES(?,?,?,?,?)", (id,s_id,int(quantity),float(price),str(datetime.datetime.now())))
+                    con.commit()
+                    con.close() 
+                except Error as e:
+                    foreign_list.append(id)
+
 
             elif id=='':
-                return render(request,'buy.html',context={'error':0})
+                break
+                #return render(request,'buy.html',context={'error':0})
 
 
             elif id!='' and (s_id=='' or price=='' or quantity==''): 
-                
-                return render(request,'buy.html',context={'error':1,'i':i+1,'id':id})
+                id_list.append(id)
+                #return render(request,'buy.html',context={'error':1,'i':i+1,'id':id})
 
-              
 
-        return render(request,'buy.html',context={'error':0})
+        if len(id_list)==0 and len(foreign_list)==0:      
+            return render(request,'buy.html',context={'error':0})
+
+        elif len(id_list)!=0 and len(foreign_list)==0:
+            return render(request,'buy.html',context={'error':1,'ids':id_list})
+
+        elif len(id_list)==0 and len(foreign_list)!=0:
+            return render(request,'buy.html',context={'error':2,'foreigns':foreign_list})
+
+        else:
+            return render(request,'buy.html',context={'error':3,'ids':id_list,'foreigns':foreign_list})            
 
 
 
