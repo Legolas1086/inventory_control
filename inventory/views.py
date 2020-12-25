@@ -99,6 +99,7 @@ def search(request):
             'quantity':i[6],
             'price':i[7]
         })
+    con.close()    
 
     return render(request,'search.html',context={'item':item_list})
     
@@ -131,7 +132,7 @@ def search_result(request):
                     'quantity':i[6],
                     'price':i[7]
                 }) 
-
+            con.close()
             return render(request,'search.html',context={'item':item_list})     
 
 
@@ -158,7 +159,8 @@ def detail_result(request):
                     'c_no':i[5],
                     'date_time':i[6]
                 })
-
+            
+            coon.close()
             return render(request,'detail_result.html',context={'header':0,'sold':sold_list})    
 
 
@@ -176,7 +178,8 @@ def detail_result(request):
                     'price':i[3],
                     'date_time':i[4]
                 })
-
+            
+            con.close()
             return render(request,'detail_result.html',context={'header':1,'bought':bought_list})    
 
 
@@ -193,7 +196,8 @@ def detail_result(request):
                     'name':i[1],
                     'rating':i[2]
                 }) 
-
+            
+            con.close()
             return render(request,'detail_result.html',context={'header':2,'supplier':supplier_list})
 
 
@@ -210,6 +214,7 @@ def detail_result(request):
                 'occupied':i[3]
             })   
             
+            con.close()
             return render(request,'detail_result.html',context={'header':3,'storage':warehouse_list})
 
 
@@ -225,7 +230,7 @@ def detail_result(request):
                 'name':i[1]
             })  
 
-          
+            con.close()
             return render(request,'detail_result.html',context={'header':4,'categories':category_list})    
 
 
@@ -240,7 +245,8 @@ def detail_result(request):
                 'id':i[0],
                 'stored':i[1]
             })
-
+            
+            con.close()
             return render(request,'detail_result.html', context={'header':5,'products':storage_list})   
 
 
@@ -284,6 +290,7 @@ def add_item(request):
             con.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?)",(id,name,brand,c_id,size,color,float(price)))
             con.execute("INSERT INTO stored VALUES(?,?,?)",(id,w_id,int(quantity)))
             con.commit()
+            con.close()
             return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and (name=='' or brand=='' or c_id=='' or price=='' or w_id=='' or quantity==''):
@@ -305,6 +312,7 @@ def add_supplier(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO supplier VALUES(?,?,?)",(id,name,float(rating)))
             con.commit()
+            con.close()
             return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and (name=='' or rating==''):
@@ -326,6 +334,7 @@ def add_category(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO category VALUES(?,?)",(id,name))
             con.commit()
+            con.close()
             return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and name=='':
@@ -345,6 +354,7 @@ def add_warehouse(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO warehouse VALUES(?,?,?)",(id,adress,int(capacity)))
             con.commit()
+            con.close()
             return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and (adress=='' or capacity==''):
@@ -364,6 +374,7 @@ def update_price(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("UPDATE item SET item_price=? WHERE item_id=?",(float(price),id))
             con.commit()
+            con.close()
             return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
         elif id!='' and price=='':
             return render(request,'update.html',context={'error1':1,'error2':0,'error3':0})
@@ -388,6 +399,7 @@ def update_rating(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("UPDATE supplier SET rating=? WHERE s_id=?",(float(rating),id))
             con.commit()
+            con.close()
             return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
 
        
