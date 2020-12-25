@@ -39,6 +39,14 @@
         </form>
     </div>
 
+    {% ifequal 1 error1 %}
+    <div class="error">
+        <pre>
+            ERROR! A mandatory field was empty.
+        </pre>
+    </div>
+    {% endifequal %}
+
 
     <div class="rating">
         <h2>Update supplier rating</h2>
@@ -49,6 +57,22 @@
             <input type="submit" name="submit_button" id="submit_button" placeholder="update">
         </form>
     </div>
+
+    {% ifequal 1 error2 %}
+    <div class="error">
+        <pre>
+            ERROR! A mandatory field was empty.
+        </pre>
+    </div>
+    {% endifequal %}
+
+    {% ifequal 1 error3 %}
+    <div class="error">
+        <pre>
+            ERROR! Invalid rating, should be betweem 0 and 5.
+        </pre>
+    </div>
+    {% endifequal %}
 </div>
 
 
@@ -172,6 +196,14 @@
 
     .rating{
         margin-top: 10rem;
+    }
+
+    .error{
+        display:flex;
+        margin-top: 5rem;
+        margin-left: 10rem;
+        font-size: xx-large;
+        color: red;
     }
 
 

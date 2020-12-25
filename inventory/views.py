@@ -364,10 +364,11 @@ def update_price(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("UPDATE item SET item_price=? WHERE item_id=?",(float(price),id))
             con.commit()
-            return render(request,'update.html')
-
+            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
+        elif id!='' and price=='':
+            return render(request,'update.html',context={'error1':1,'error2':0,'error3':0})
         else:
-            return render(request,'update.html')
+            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
 
 
 def update_rating(request):
@@ -375,15 +376,23 @@ def update_rating(request):
         id = request.GET.get('id')
         rating = request.GET.get('rating')
 
-        if id!='' and rating!='':
+        if id!='' and rating=='':
+            return render(request,'update.html',context={'error1':0,'error2':1,'error3':0})        
+
+
+        elif int(rating)<0 or int(rating)>5:
+            return render(request,'update.html',context={'error1':0,'error2':0,'error3':1})
+
+        elif id!='' and rating!='':
             con = sqlite3.connect('/home/clown/DB/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("UPDATE supplier SET rating=? WHERE item_id=?",(float(rating),id))
             con.commit()
-            return render(request,'update.html')
+            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
 
+       
         else:
-            return render(request,'update.html')
+            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
 
     
 
