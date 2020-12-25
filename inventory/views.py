@@ -386,7 +386,7 @@ def update_rating(request):
         elif id!='' and rating!='':
             con = sqlite3.connect('/home/clown/DB/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON") 
-            con.execute("UPDATE supplier SET rating=? WHERE item_id=?",(float(rating),id))
+            con.execute("UPDATE supplier SET rating=? WHERE s_id=?",(float(rating),id))
             con.commit()
             return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
 
