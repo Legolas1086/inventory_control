@@ -47,7 +47,24 @@
         </form>
     </div>
 
-    {% ifequal 1 error1 %}
+    {% ifequal 5 error %}
+    <div class="error">
+        <pre>
+            ERROR!  Invalid category id. 
+        </pre>
+    </div>
+    {% endifequal %}
+
+
+    {% ifequal 6 error %}
+    <div class="error">
+        <pre>
+            ERROR!  Invalid warehouse id. 
+        </pre>
+    </div>
+    {% endifequal %}
+
+    {% ifequal 1 error %}
     <div class="error">
         <pre>
             ERROR!  A mandatory filed was empty.
@@ -66,7 +83,7 @@
         </form>
     </div>
 
-    {% ifequal 1 error2 %}
+    {% ifequal 2 error %}
     <div class="error">
         <pre>
             ERROR!  A mandatory filed was empty.
@@ -84,7 +101,7 @@
         </form>
     </div>
 
-    {% ifequal 1 error3 %}
+    {% ifequal 3 error %}
     <div class="error">
         <pre>
             ERROR!  A mandatory filed was empty.
@@ -105,7 +122,7 @@
         </form>
     </div>
 
-    {% ifequal 1 error4 %}
+    {% ifequal 4 error %}
     <div class="error">
         <pre>
             ERROR!  A mandatory filed was empty.

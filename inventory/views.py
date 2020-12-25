@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import generic
 import datetime
 import sqlite3
+from sqlite3 import Error
 
 
 
@@ -287,17 +288,28 @@ def add_item(request):
         if id!='' and name!='' and brand!='' and c_id!='' and price!='' and w_id!='' and quantity!='':
             con = sqlite3.connect('/home/clown/DB/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON") 
-            con.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?)",(id,name,brand,c_id,size,color,float(price)))
-            con.execute("INSERT INTO stored VALUES(?,?,?)",(id,w_id,int(quantity)))
-            con.commit()
-            con.close()
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
+            try:
+                con.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?)",(id,name,brand,c_id,size,color,float(price)))    
+                
+
+            except Error as e:
+                return render  (request,'add.html',context={'error':5}) 
+
+            try:
+                con.execute("INSERT INTO stored VALUES(?,?,?)",(id,w_id,int(quantity))) 
+                con.commit() 
+
+            except Error as e:
+                return render(request,'add.html',context={'error':6})      
+
+
+            return render(request,'add.html',context={'error':0})
 
         elif id!='' and (name=='' or brand=='' or c_id=='' or price=='' or w_id=='' or quantity==''):
-            return render(request,'add.html',context={'error1':1,'error2':0,'error3':0,'error4':0})
+            return render(request,'add.html',context={'error':1})
 
         else:
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})    
+            return render(request,'add.html',context={'error':0})    
 
 
 
@@ -313,13 +325,13 @@ def add_supplier(request):
             con.execute("INSERT INTO supplier VALUES(?,?,?)",(id,name,float(rating)))
             con.commit()
             con.close()
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
+            return render(request,'add.html',context={'error':0})
 
         elif id!='' and (name=='' or rating==''):
-            return render(request,'add.html',context={'error1':0,'error2':1,'error3':0,'error4':0})    
+            return render(request,'add.html',context={'error':2})    
 
         else:
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
+            return render(request,'add.html',context={'error':0})
 
 
 
@@ -335,13 +347,13 @@ def add_category(request):
             con.execute("INSERT INTO category VALUES(?,?)",(id,name))
             con.commit()
             con.close()
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
+            return render(request,'add.html',context={'error':0})
 
         elif id!='' and name=='':
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':1,'error4':0})  
+            return render(request,'add.html',context={'error':3})  
 
         else:
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
+            return render(request,'add.html',context={'error':0})
 
 def add_warehouse(request):
     if request.method=='GET':
@@ -355,13 +367,13 @@ def add_warehouse(request):
             con.execute("INSERT INTO warehouse VALUES(?,?,?)",(id,adress,int(capacity)))
             con.commit()
             con.close()
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
+            return render(request,'add.html',context={'error':0})
 
         elif id!='' and (adress=='' or capacity==''):
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':1})    
+            return render(request,'add.html',context={'error':4})    
 
         else:
-            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
+            return render(request,'add.html',context={'error':0})
 
 
 def update_price(request):
