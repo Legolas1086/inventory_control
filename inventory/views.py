@@ -257,7 +257,7 @@ def change_result(request):
         print(change)
 
         if choice=='add':
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif choice=='update':
             return render(request,'update.html')  
@@ -284,13 +284,13 @@ def add_item(request):
             con.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?)",(id,name,brand,c_id,size,color,float(price)))
             con.execute("INSERT INTO stored VALUES(?,?,?)",(id,w_id,int(quantity)))
             con.commit()
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and (name=='' or brand=='' or c_id=='' or price=='' or w_id=='' or quantity==''):
-            return render(request,'add.html',context={'error':1})
+            return render(request,'add.html',context={'error1':1,'error2':0,'error3':0,'error4':0})
 
         else:
-            return render(request,'add.html',context={'error':0})    
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})    
 
 
 
@@ -305,13 +305,13 @@ def add_supplier(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO supplier VALUES(?,?,?)",(id,name,float(rating)))
             con.commit()
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and (name=='' or rating==''):
-            return render(request,'add.html',context={'error':1})    
+            return render(request,'add.html',context={'error1':0,'error2':1,'error3':0,'error4':0})    
 
         else:
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
 
 
@@ -326,13 +326,13 @@ def add_category(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO category VALUES(?,?)",(id,name))
             con.commit()
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and name=='':
-            return render(request,'add.html',context={'error':1})  
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':1,'error4':0})  
 
         else:
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
 def add_warehouse(request):
     if request.method=='GET':
@@ -345,13 +345,13 @@ def add_warehouse(request):
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO warehouse VALUES(?,?,?)",(id,adress,int(capacity)))
             con.commit()
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
         elif id!='' and (adress=='' or capacity==''):
-            return render(request,'add.html',context={'error':0})    
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':1})    
 
         else:
-            return render(request,'add.html',context={'error':0})
+            return render(request,'add.html',context={'error1':0,'error2':0,'error3':0,'error4':0})
 
 
 def update_price(request):

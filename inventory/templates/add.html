@@ -47,6 +47,14 @@
         </form>
     </div>
 
+    {% ifequal 1 error1 %}
+    <div class="error">
+        <pre>
+            ERROR!  A mandatory filed was empty.
+        </pre>
+    </div>
+    {% endifequal %}
+
     <div class="supplier">
         <h2>Add new supplier</h2>
         <form method="GET" action="{% url 'add_supplier' %}">
@@ -58,6 +66,13 @@
         </form>
     </div>
 
+    {% ifequal 1 error2 %}
+    <div class="error">
+        <pre>
+            ERROR!  A mandatory filed was empty.
+        </pre>
+    </div>
+    {% endifequal %}
 
     <div class="category">
         <h2>Add new Category</h2>
@@ -68,6 +83,15 @@
             <input type="submit" name="submit_button" id="submit_button" value="ADD">
         </form>
     </div>
+
+    {% ifequal 1 error3 %}
+    <div class="error">
+        <pre>
+            ERROR!  A mandatory filed was empty.
+        </pre>
+    </div>
+    {% endifequal %}
+
 
 
     <div class="warehouse">
@@ -80,6 +104,15 @@
             <input type="submit" name="submit_button" id="submit_button" value="ADD">
         </form>
     </div>
+
+    {% ifequal 1 error4 %}
+    <div class="error">
+        <pre>
+            ERROR!  A mandatory filed was empty.
+        </pre>
+    </div>
+    {% endifequal %}
+
 
 
 </div>    
@@ -210,6 +243,14 @@
     .warehouse >form> #item_el,.supplier > form > #item_el,.category > form > #item_el{
       
         width: 20rem;
+    }
+
+    .error{
+        display:flex;
+        margin-top: 5rem;
+        margin-left: 10rem;
+        font-size: xx-large;
+        color: red;
     }
 
    
