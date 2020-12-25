@@ -32,10 +32,16 @@ def sell_insert(request):
                 con.execute("INSERT INTO sell(item_id, quantity, unit_price, cust_name, cust_phone,date_time) VALUES(?,?,?,?,?,?)",(id,int(quantity),float(price),c_name,c_no,str(datetime.datetime.now())))
                 con.commit()
                 con.close()
-                
 
-            else:
+
+                
+                
+            elif id=='':
+                return render(request,'sell.html',context={'error':0})
+
+            elif id!='' and (quantity=='' or price=='' or c_name=='' or c_no==''):
                 return render(request,'sell.html',context={'error':1,'i':i+1,'id':id}) 
+    
 
         return render(request,'sell.html',context={'error':0})          
 
@@ -63,9 +69,15 @@ def buy_insert(request):
                 con.close() 
                 
 
+            elif id=='':
+                return render(request,'buy.html',context={'error':0})
+
+
             elif id!='' and (s_id=='' or price=='' or quantity==''): 
                 
                 return render(request,'buy.html',context={'error':1,'i':i+1,'id':id})
+
+              
 
         return render(request,'buy.html',context={'error':0})
 
@@ -242,12 +254,16 @@ def change_result(request):
     if request.method=="GET":
         choice = request.GET.get("change")
         submitbutton = request.GET.get('submit_button')
+        print(change)
 
         if choice=='add':
             return render(request,'add.html')
 
         elif choice=='update':
-            return render(request,'update.html')          
+            return render(request,'update.html')  
+
+        else:
+            return render(request,'change.html')            
 
 
 def add_item(request):
