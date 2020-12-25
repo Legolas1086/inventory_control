@@ -383,15 +383,33 @@ def update_price(request):
 
         if id!='' and price!='':
             con = sqlite3.connect('/home/clown/DB/Inventory.db')
-            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("PRAGMA foreign_keys=ON")
+            ids = con.execute("SELECT item_id FROM item") 
+            id_list = []
+            for i in ids:
+                id_list.append(i[0])
+
+            temp = 0    
+            for i in range(len(id_list)):
+                if id_list[i]==id:
+                    temp = 0
+                    break
+                else:
+                    temp = 1
+            
+            if temp==1:
+                return render(request,'update.html',context={'error':4})
+
             con.execute("UPDATE item SET item_price=? WHERE item_id=?",(float(price),id))
             con.commit()
             con.close()
-            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
+            return render(request,'update.html',context={'error':0})
+
         elif id!='' and price=='':
-            return render(request,'update.html',context={'error1':1,'error2':0,'error3':0})
+            return render(request,'update.html',context={'error':1})
+
         else:
-            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
+            return render(request,'update.html',context={'error':0})
 
 
 def update_rating(request):
@@ -400,23 +418,39 @@ def update_rating(request):
         rating = request.GET.get('rating')
 
         if id!='' and rating=='':
-            return render(request,'update.html',context={'error1':0,'error2':1,'error3':0})        
+            return render(request,'update.html',context={'error':2})        
 
 
         elif int(rating)<0 or int(rating)>5:
-            return render(request,'update.html',context={'error1':0,'error2':0,'error3':1})
+            return render(request,'update.html',context={'error':3})
 
         elif id!='' and rating!='':
             con = sqlite3.connect('/home/clown/DB/Inventory.db')
-            con.execute("PRAGMA foreign_keys=ON") 
+            con.execute("PRAGMA foreign_keys=ON")
+            ids = con.execute("SELECT item_id FROM item") 
+            id_list = []
+            for i in ids:
+                id_list.append(i[0])
+
+            temp = 0    
+            for i in range(len(id_list)):
+                if id_list[i]==id:
+                    temp = 0
+                    break
+                else:
+                    temp = 1
+            
+            if temp==1:
+                return render(request,'update.html',context={'error':5})
+                 
             con.execute("UPDATE supplier SET rating=? WHERE s_id=?",(float(rating),id))
             con.commit()
             con.close()
-            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
+            return render(request,'update.html',context={'error':0})
 
        
         else:
-            return render(request,'update.html',context={'error1':0,'error2':0,'error3':0})
+            return render(request,'update.html',context={'error':0})
 
     
 
