@@ -27,7 +27,7 @@
         </div>
     </div>
     
-    <div class="main">
+<div class="main">
  
     <div class = "container">
         
@@ -93,22 +93,48 @@
             <input type="text" id="c_name_9" name="c_name_9", placeholder="customer name">
             <input type="number" id="c_no_9" name="c_no_9" placeholder="phone">
 
-           
-
-            
 
             <input type="submit" id="submit" name="submit" value = sell>
 
         </form>
+       
+         
     </div>
+
+
     {% ifequal 1 error %}
     <div class="error">
-        <pre>
-            ERROR! at row {{i}}. A mendatory field was empty for {{id}}.
-              Plese re-enter all rows below it with all mandatory fields. 
-        </pre>
+        <p>
+            ERROR! . A mendatory field was empty for products/items {% for i in ids %} "{{i}}" , {% endfor %}.
+                              Please re-enter these rows.
+        </p>
     </div>
     {% endifequal %}
+
+
+    {% ifequal 2 error %}
+    <div class="error">
+        <p>
+            ERROR! . Invalid products/items {% for i in foreigns %} "{{i}}" , {% endfor %}.
+                              Please re-enter valid products/items.
+        </p>
+    </div>
+    {% endifequal %}
+
+    {% ifequal 3 error %}
+    <div class="error">
+        <p>
+            ERROR! . A mendatory field was empty for products/items {% for i in ids %} "{{i}}" , {% endfor %}.
+            Please re-enter these rows.
+        </p>
+        <p>  
+            ERROR! . Invalid products/items {% for i in foreigns %} "{{i}}" , {% endfor %}.
+                              Please re-enter valid products/items.
+        </p>  
+    </div>
+    {% endifequal %}
+
+
 </div>
 
 <style>
@@ -225,11 +251,19 @@
 
     .error{
         display:flex;
+        width: 80rem;
         margin-top: 5rem;
         margin-left: 20rem;
         font-size: xx-large;
         color: red;
     }
+    p{
+        margin-left: 5rem;
+    }
+
+    
+
+   
 
     
 
