@@ -25,7 +25,9 @@
                 <a href="{% url 'detail' %}">detail</a>
             </button>
         </div>
-    </div> 
+    </div>
+    
+    <div class="main">
  
     <div class = "container">
         
@@ -99,7 +101,15 @@
 
         </form>
     </div>
-
+    {% ifequal 1 error %}
+    <div class="error">
+        <pre>
+            ERROR! at row {{i}}. A mendatory field was empty for {{id}}.
+              Plese re-enter all rows below it with all mandatory fields. 
+        </pre>
+    </div>
+    {% endifequal %}
+</div>
 
 <style>
 
@@ -176,11 +186,15 @@
         text-shadow: 2px 2px ;
     }
 
+    .main{
+        display: flex;
+        flex-direction: column;
+    }
 
 
   
     .container{
-        margin-top: 10rem;
+        margin-top: 5rem;
         margin-left: 30rem;
         border-radius: 15px 15px 15px 15px;
         padding:0px;
@@ -209,6 +223,15 @@
         margin-left: 30rem;
     }
 
+    .error{
+        display:flex;
+        margin-top: 5rem;
+        margin-left: 20rem;
+        font-size: xx-large;
+        color: red;
+    }
+
+    
 
 
 </style>    

@@ -27,7 +27,8 @@
           
         </div>
     </div> 
- 
+
+<div class="main">
     <div class = container>
         
         <form method = 'GET' action = "{% url 'buy_insert' %}">
@@ -87,6 +88,17 @@
 
         </form>
     </div>
+
+    {% ifequal 1 error %}
+    <div class="error">
+        <pre>
+            ERROR! at row {{i}}. A mandatory field was empty for {{id}}.
+              Please enter all row below it with all mandatory fields.
+        </pre>
+    </div>
+    {% endifequal %}
+
+</div>    
 
 
 <style>
@@ -168,12 +180,17 @@
         text-shadow: 2px 2px ;
     }
 
+    .main{
+        display: flex;
+        flex-direction: column;
+    }
+
 
 
 
     .container{
         
-        margin-top: 10rem;
+        margin-top: 5rem;
         margin-left: 30rem;
         border-radius: 15px 15px 15px 15px;
         padding:0px;
@@ -197,6 +214,15 @@
         margin-top: 3rem;
 
     }
+
+    .error{
+        display:flex;
+        margin-top: 3rem;
+        margin-left: 20rem;
+        font-size: xx-large;
+        color: red;
+    }
+
 
 
 </style>    

@@ -7,10 +7,10 @@ import sqlite3
 
 # Create your views here.
 def home(request):
-    return render(request,'index.html')
+    return render(request,'index.html',context={'error':0})
 
 def sell(request):
-    return render(request, 'sell.html')  
+    return render(request, 'sell.html',context={'error':0})  
       
 
 def sell_insert(request):
@@ -35,9 +35,9 @@ def sell_insert(request):
                 
 
             else:
-                return render(request,'sell.html') 
+                return render(request,'sell.html',context={'error':1,'i':i+1,'id':id}) 
 
-        return render(request,'sell.html')          
+        return render(request,'sell.html',context={'error':0})          
 
 
 
@@ -63,10 +63,11 @@ def buy_insert(request):
                 con.close() 
                 
 
-            else: 
-                return render(request,'buy.html')
+            elif id!='' and (s_id=='' or price=='' or quantity==''): 
+                
+                return render(request,'buy.html',context={'error':1,'i':i+1,'id':id})
 
-        return render(request,'buy.html')
+        return render(request,'buy.html',context={'error':0})
 
 
 
