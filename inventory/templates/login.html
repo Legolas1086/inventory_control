@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <div class="main">
+        <div class="outer">
+        <div class="container">
+            <form method="GET" action="{% url 'home' %}">
+                <input type="text" name="username" id="username" placeholder="username">
+                <input type="password" name="password" id="password" placeholder="password">
+                <input type="submit" name="login" id="login" value="login"> 
+            </form>
+        </div>
+        {% ifequal 1 error %}
+        <div class="error">
+            <pre>
+                Login failed! please check 
+                username and password
+            </pre>
+        </div>
+        {% endifequal %}
+    </div>
+
+</div>
+</body>
+
+
+<style>
+
+    body{
+       
+        background-color: rgb(220, 236, 240);
+    }
+    .outer{
+        width:30rem ;
+        height:20rem;
+        margin-top: 15rem;
+        margin-left: 40rem;
+
+        background-color:rgb(162, 201, 216);
+    }
+
+    .container{
+        margin-top: 10rem;
+        margin-left: 5rem;
+        width: 30rem;
+        
+
+    }
+
+   
+
+    .container > form{
+        display: flex;
+        margin-top: 5rem;
+        flex-direction: column;
+     
+    }
+
+    #username{
+        margin-top: 5rem;
+        padding: 0.5rem;
+        border-radius: 10px 10px;
+        width: 20rem;
+    }
+
+    #password {
+        margin-top: 1rem;
+        padding: 0.5rem;
+        border-radius: 10px 10px;
+        width: 20rem;
+    }
+
+    #login{
+        margin-top: 2rem;
+        padding: 0.5rem;
+        width: 10rem;
+        border-radius: 10px 10px;
+        margin-left: 5rem;
+    }
+
+    .error{
+        color: red;
+        font-size: large;
+    }
+</style>
+</html>

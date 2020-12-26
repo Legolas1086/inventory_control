@@ -3,12 +3,22 @@ from django.views import generic
 import datetime
 import sqlite3
 from sqlite3 import Error
+from .models import user
 
-
+def login(request):
+    return render(request,'login.html',context={'error':0})
 
 # Create your views here.
 def home(request):
-    return render(request,'index.html',context={'error':0})
+    if request.method=='GET':
+        username = request.GET.get('username')
+        password = request.GET.get('password')
+        users = user.objects.all()
+        for i in users:
+            if username==i.username and password==i.password:
+                return render(request,'index.html')
+
+        return render(request,'login.html',context={'error':1})            
 
 def sell(request):
     return render(request, 'sell.html',context={'error':0})  
@@ -192,7 +202,7 @@ def detail_result(request):
                     'date_time':i[6]
                 })
             
-            coon.close()
+            con.close()
             return render(request,'detail_result.html',context={'header':0,'sold':sold_list})    
 
 

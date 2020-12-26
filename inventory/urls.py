@@ -1,9 +1,10 @@
 from django.urls import path
 from .views import home,sell,sell_insert,buy,buy_insert,search,search_result,detail,change,detail_result,change_result,add_item,add_category,add_supplier,add_warehouse
-from .views import update_price,update_rating
+from .views import update_price,update_rating,login
 
 urlpatterns = [
-    path('', home, name = 'home'),
+    path('',login,name='login'),
+    path('home/', home, name = 'home'),
     path('sell/', sell, name = 'sell'),
     path('sell_insert/',sell_insert, name='sell_insert'),
     path('buy/', buy, name='buy'),
