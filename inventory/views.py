@@ -10,15 +10,15 @@ def login(request):
 
 # Create your views here.
 def home(request):
-    if request.method=='GET':
-        username = request.GET.get('username')
-        password = request.GET.get('password')
-        users = user.objects.all()
-        for i in users:
-            if username==i.username and password==i.password:
-                return render(request,'index.html')
+    #if request.method=='GET':
+     #   username = request.GET.get('username')
+      #  password = request.GET.get('password')
+       # users = user.objects.all()
+        #for i in users:
+         #   if username==i.username and password==i.password:
+        return render(request,'index.html')
 
-        return render(request,'login.html',context={'error':1})            
+        #return render(request,'login.html',context={'error':1})            
 
 def sell(request):
     return render(request, 'sell.html',context={'error':0})  
