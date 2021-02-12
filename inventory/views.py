@@ -40,7 +40,7 @@ def sell_insert(request):
             #submitbutton = request.GET.get('submit')
 
             if id !='' and quantity !='' and price !='' and c_name !='' and c_no !='':
-                con = sqlite3.connect('/home/clown/DB/Inventory.db')
+                con = sqlite3.connect('./database/Inventory.db')
                 con.execute("PRAGMA foreign_keys=ON") 
                 try:
                     con.execute("INSERT INTO sell(item_id, quantity, unit_price, cust_name, cust_phone,date_time) VALUES(?,?,?,?,?,?)",(id,int(quantity),float(price),c_name,c_no,str(datetime.datetime.now())))
@@ -91,7 +91,7 @@ def buy_insert(request):
         #submitbutton = request.GET.get('submit')
 
             if id !='' and s_id !='' and price !='' and quantity !='':
-                con = sqlite3.connect('/home/clown/DB/Inventory.db')
+                con = sqlite3.connect('./database/Inventory.db')
                 con.execute("PRAGMA foreign_keys=ON")
                 try:
                     con.execute("INSERT INTO bought(item_id, s_id, quantity, unit_price,date_time) VALUES(?,?,?,?,?)", (id,s_id,int(quantity),float(price),str(datetime.datetime.now())))
@@ -126,7 +126,7 @@ def buy_insert(request):
 
 
 def search(request):
-    con = sqlite3.connect('/home/clown/DB/Inventory.db')
+    con = sqlite3.connect('./database/Inventory.db')
     obj = con.execute("SELECT * FROM item_details ORDER BY item_price")
     con.commit()
     item_list=[]
@@ -158,7 +158,7 @@ def search_result(request):
         submitbutton = request.GET.get('search_button')    
 
         if sludge is not None:
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             obj = con.execute("SELECT * FROM item_details WHERE item_id like ? OR item_name like ? OR brand like ? OR c_name like ? OR color like ? ORDER BY item_price",(sludge,sludge,sludge,sludge,sludge,))
             con.commit()
 
@@ -187,7 +187,7 @@ def detail(request):
 def detail_result(request):
     if request.method=='GET':
         if request.GET.get('details')=='sold':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             obj = con.execute("SELECT * FROM sell ORDER BY date_time DESC")
             con.commit()
             sold_list = []
@@ -208,7 +208,7 @@ def detail_result(request):
 
 
         elif request.GET.get('details')=='bought':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             obj = con.execute("SELECT * FROM bought ORDER BY date_time DESC")
             con.commit()
             bought_list = []
@@ -228,7 +228,7 @@ def detail_result(request):
 
 
         elif request.GET.get('details')=='suppliers':     
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             obj = con.execute("SELECT * FROM supplier")
             con.commit()
             supplier_list=[]
@@ -244,7 +244,7 @@ def detail_result(request):
 
 
         elif request.GET.get('details')=='warehouse':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             obj = con.execute("SELECT warehouse.w_id,warehouse.w_adress,warehouse.w_capacity,sum(stored.quantity) AS Occupied FROM warehouse,stored WHERE warehouse.w_id=stored.w_id GROUP BY stored.w_id")
             con.commit()
             warehouse_list=[]
@@ -262,7 +262,7 @@ def detail_result(request):
 
 
         elif request.GET.get('details')=='category':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             obj = con.execute("SELECT * FROM category")
             con.commit()
             category_list = []
@@ -278,7 +278,7 @@ def detail_result(request):
 
 
         elif request.GET.get('details')=='product stored':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             obj = con.execute("SELECT item_id,w_id FROM stored")
             con.commit()
             storage_list = []
@@ -327,7 +327,7 @@ def add_item(request):
         quantity = request.GET.get('quantity')
 
         if id!='' and name!='' and brand!='' and c_id!='' and price!='' and w_id!='' and quantity!='':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON") 
             try:
                 con.execute("INSERT INTO item VALUES(?,?,?,?,?,?,?)",(id,name,brand,c_id,size,color,float(price)))    
@@ -361,7 +361,7 @@ def add_supplier(request):
         rating = request.GET.get('rating')
   
         if id!='' and name!='' and rating!='':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO supplier VALUES(?,?,?)",(id,name,float(rating)))
             con.commit()
@@ -383,7 +383,7 @@ def add_category(request):
         
   
         if id!='' and name!='':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO category VALUES(?,?)",(id,name))
             con.commit()
@@ -403,7 +403,7 @@ def add_warehouse(request):
         capacity = request.GET.get('capacity')
   
         if id!='' and adress!='' and capacity!='':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON") 
             con.execute("INSERT INTO warehouse VALUES(?,?,?)",(id,adress,int(capacity)))
             con.commit()
@@ -423,7 +423,7 @@ def update_price(request):
         price = request.GET.get('price')
 
         if id!='' and price!='':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON")
             ids = con.execute("SELECT item_id FROM item") 
             id_list = []
@@ -466,7 +466,7 @@ def update_rating(request):
             return render(request,'update.html',context={'error':3})
 
         elif id!='' and rating!='':
-            con = sqlite3.connect('/home/clown/DB/Inventory.db')
+            con = sqlite3.connect('./database/Inventory.db')
             con.execute("PRAGMA foreign_keys=ON")
             ids = con.execute("SELECT item_id FROM item") 
             id_list = []
