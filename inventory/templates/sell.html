@@ -93,6 +93,9 @@
             <input type="text" id="c_name_9" name="c_name_9", placeholder="customer name">
             <input type="number" id="c_no_9" name="c_no_9" placeholder="phone">
 
+            <button type="button" id = "sum_button" onclick="sum(document.getElementById('price_0').value,document.getElementById('price_1').value,document.getElementById('price_2').value,document.getElementById('price_3').value,document.getElementById('price_4').value,document.getElementById('price_5').value,document.getElementById('price_6').value,document.getElementById('price_7').value,document.getElementById('price_8').value,document.getElementById('price_9').value,)">sum</button>
+            <input type="number" name="total" id="total" placeholder="total">
+
 
             <input type="submit" id="submit" name="submit" value = sell>
 
@@ -231,7 +234,7 @@
     #item_id_2,#c_name_2,#c_no_2,#quantity_2,#price_2,#item_id_3,#c_name_3,#c_no_3,#quantity_3,#price_3,
     #item_id_4,#c_name_4,#c_no_4,#quantity_4,#price_4,#item_id_5,#c_name_5,#c_no_5,#quantity_5,#price_5,
     #item_id_6,#c_name_6,#c_no_6,#quantity_6,#price_6,#item_id_7,#c_name_7,#c_no_7,#quantity_7,#price_7,
-    #item_id_8,#c_name_8,#c_no_8,#quantity_8,#price_8,#item_id_9,#c_name_9,#c_no_9,#quantity_9,#price_9{
+    #item_id_8,#c_name_8,#c_no_8,#quantity_8,#price_8,#item_id_9,#c_name_9,#c_no_9,#quantity_9,#price_9,#total,#sum_button{
         padding: 1rem;
         border-radius: 10px;
         margin-top: 0.7rem;
@@ -268,6 +271,33 @@
     
 
 
-</style>    
+</style>   
+
+
+<script>
+  function sum(price_0,price_1,price_2,price_3,price_4,price_5,price_6,price_7,price_8,price_9){
+      var i;
+      var sum=0;
+      for(i=0;i<10;i++){
+          var str = "price_";
+          var num = i.toString();
+          if(str+num==''){
+              alert(i);
+              break;
+              
+          }
+          else{
+            sum = sum + (parseInt(str+num));
+              
+          }
+        
+       }
+     
+      alert(sum);
+  }
+
+</script>
+
+
 </body>
 </html>
